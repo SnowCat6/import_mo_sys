@@ -4,6 +4,7 @@ bl_info = {
     "version": (0, 0, 1),
     "blender": (2, 80, 0),
     "location": "File > Import > Import mo-sys camera data",
+    "doc_url":     "https://docs.retopoflow.com",
     "category": "Import-Export",
 }
 
@@ -36,14 +37,14 @@ def import_mo_sys_camera(context, filepath):
     
     # would normally load the data here
     frameNumber = 1
-    frames = {}
+    #frames = {}
     
     for line in lines:
         line = [i.strip() for i in line.split('\t')]
         time, x, z, y, rx, ry, rz = line[:7]
         
-        if time in frames: continue
-        frames[time] = True        
+        #if time in frames: continue
+        #frames[time] = True        
 
         camera_object.location.x = floatLocation(x)
         camera_object.location.y = floatLocation(y)
@@ -58,7 +59,7 @@ def import_mo_sys_camera(context, filepath):
         frameNumber += 1     
 
     camera_object.select_set(True)    
-    bpy.context.view_layer.objects.active = objectToSelect = camera_object
+    bpy.context.view_layer.objects.active = camera_object
     
     return {'FINISHED'}
 
